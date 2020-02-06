@@ -1,0 +1,22 @@
+services:
+    -
+        class: App\PHPStan\AssociationTableMixinClassReflectionExtension
+        tags:
+            - phpstan.broker.methodsClassReflectionExtension
+            - phpstan.broker.propertiesClassReflectionExtension
+    -
+        class: App\PHPStan\CrudSubjectDynamicMethodReturnExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+    -
+        class: App\PHPStan\ControllerDynamicMethodReturnExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+    -
+        class: App\PHPStan\CrudDynamicMethodReturnExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+    -
+        class: App\PHPStan\QueryDynamicMethodReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
