@@ -48,7 +48,7 @@ class QueryDynamicMethodReturnTypeExtension implements DynamicMethodReturnTypeEx
         return $this->$funcName($methodReflection, $methodCall, $scope);
     }
 
-    public function getTypeContain(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type
+    public function getTypeContainMethod(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type
     {
         if (count($methodCall->args) === 0) {
             $method = $this->broker->getClass(\Cake\ORM\EagerLoader::class)->getNativeMethod('getContain');
