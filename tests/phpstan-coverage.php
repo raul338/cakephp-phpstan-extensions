@@ -50,5 +50,6 @@ $input = new Symfony\Component\Console\Input\ArrayInput([
     'command' => 'analyze',
     '--configuration' => 'tests.neon',
     '--xdebug' => true,
+    '--debug' => true,
 ]);
 $app->run($input);
