@@ -8,11 +8,14 @@ use Cake\Controller\Controller;
  */
 class CrudSubjectController extends Controller
 {
+    /**
+     * @return void
+     */
     public function crudSubjectTest()
     {
         $this->loadComponent('Crud');
         $this->Crud->on('beforeFind', function (\Cake\Event\Event $event) {
-            $event->getSubject()->query;
+            $event->getSubject()->query->contain('example');
         });
     }
 }

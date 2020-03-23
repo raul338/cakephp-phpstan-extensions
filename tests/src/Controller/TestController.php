@@ -1,5 +1,5 @@
 <?php
-namespace Raul338\Phpstan\Tests;
+namespace Raul338\Phpstan\Tests\Controller;
 
 use Cake\Controller\Controller;
 
@@ -8,44 +8,78 @@ use Cake\Controller\Controller;
  */
 class TestController extends Controller
 {
+    /**
+     * @return void
+     */
     public function loadModelTest()
     {
         $this->loadModel('Test');
     }
 
-    /**
+    /*
      * Crud Action Tests
+     */
+
+    /**
+     * @return \Cake\Http\Response|null
      */
     public function add()
     {
         $this->loadComponent('Crud');
         $this->Crud->action()->saveOptions([]);
+
+        return $this->Crud->execute();
     }
 
-    public function edit()
+    /**
+     * @param int $id id
+     * @return \Cake\Http\Response|null
+     */
+    public function edit($id)
     {
         $this->loadComponent('Crud');
         $this->Crud->action()->saveOptions([]);
+
+        return $this->Crud->execute();
     }
 
-    public function delete()
+    /**
+     * @param int $id id
+     * @return \Cake\Http\Response|null
+     */
+    public function delete($id)
     {
         $this->loadComponent('Crud');
         $this->Crud->action()->findMethod([]);
+
+        return $this->Crud->execute();
     }
 
+    /**
+     * @return \Cake\Http\Response|null
+     */
     public function index()
     {
         $this->loadComponent('Crud');
         $this->Crud->action()->findMethod('');
+
+        return $this->Crud->execute();
     }
 
+    /**
+     * @return \Cake\Http\Response|null
+     */
     public function view()
     {
         $this->loadComponent('Crud');
         $this->Crud->action()->findMethod('');
+
+        return $this->Crud->execute();
     }
 
+    /**
+     * @return \Cake\Http\Response|null
+     */
     public function customActionTest()
     {
         $this->loadComponent('Crud');
@@ -53,21 +87,33 @@ class TestController extends Controller
         /** @var \Crud\Action\IndexAction $action */
         $action = $this->Crud->action();
         $action->findMethod('');
+
+        return $this->Crud->execute();
     }
 
+    /**
+     * @return \Cake\Http\Response|null
+     */
     public function relatedModelListenerTest()
     {
         $this->loadComponent('Crud');
         $this->Crud->mapAction('relatedModelListenerTest', 'Crud.Index');
         $this->Crud->addListener('relatedModels', 'Crud.RelatedModels');
         $this->Crud->listener('relatedModels')->relatedModels(true);
+
+        return $this->Crud->execute();
     }
 
+    /**
+     * @return \Cake\Http\Response|null
+     */
     public function crudSubjectTest()
     {
         $this->loadComponent('Crud');
         $this->Crud->on('beforeFind', function (\Cake\Event\Event $event) {
-            $event->getSubject()->query;
+            $event->getSubject()->query->contain('example');
         });
+
+        return $this->Crud->execute();
     }
 }
