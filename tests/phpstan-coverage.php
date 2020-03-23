@@ -1,8 +1,18 @@
 <?php
 // phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
 
-require dirname(__DIR__) . '/vendor/autoload.php';
 require __DIR__ . '/constants.php';
+
+define('EXTRACT_DIRECTORY', TMP . '/phpstan');
+
+if (file_exists(EXTRACT_DIRECTORY . '/vendor/autoload.php') == true) {
+    echo "Extracted autoload already exists. Skipping phar extraction as presumably it's already extracted." . PHP_EOL;
+} else {
+    $composerPhar = new Phar(ROOT . '/tests/phpstan.phar');
+    $composerPhar->extractTo(EXTRACT_DIRECTORY);
+}
+require_once EXTRACT_DIRECTORY . '/vendor/autoload.php';
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 xdebug_start_code_coverage(XDEBUG_CC_UNUSED | XDEBUG_CC_DEAD_CODE);
 
@@ -43,10 +53,30 @@ class CoverageDumper
 
 $_coverage_dumper = new CoverageDumper();
 
+$classmap = require EXTRACT_DIRECTORY . '/vendor/composer/autoload_classmap.php';
+$classes = [
+    '\\Symfony\\Component\\Console\\Application' => null,
+    '\\Symfony\\Component\\Console\\Input\\ArrayInput' => null,
+];
+foreach ($classes as $classToFind => $null) {
+    foreach (array_keys($classmap) as $class) {
+        // echo sprintf('Search %s in %s', $classToFind, $class) . PHP_EOL;
+        if (strpos($class, $classToFind) !== false) {
+            $classes[$classToFind] = $class;
+            continue;
+        }
+    }
+}
+
 // vendor/bin/phpstan analyze -c tests.neon --xdebug
-$app = new \Symfony\Component\Console\Application();
-$app->add(new PHPStan\Command\AnalyseCommand());
-$input = new Symfony\Component\Console\Input\ArrayInput([
+$application = $classes['\\Symfony\\Component\\Console\\Application'];
+$app = new $application();
+$app->add(new PHPStan\Command\AnalyseCommand([
+    ROOT . '/vendor',
+    EXTRACT_DIRECTORY . '/vendor',
+]));
+$arrayInput = $classes['\\Symfony\\Component\\Console\\Input\\ArrayInput'];
+$input = new $arrayInput([
     'command' => 'analyze',
     '--configuration' => 'tests.neon',
     '--xdebug' => true,
