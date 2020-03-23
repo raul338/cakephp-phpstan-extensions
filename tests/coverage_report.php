@@ -29,3 +29,5 @@ foreach ($coverages as $coverageFile) {
 
 $report = new Facade();
 $report->process($codeCoverage, "reports");
+
+echo "Report index: " . ROOT . "/reports/index.html" . PHP_EOL;
