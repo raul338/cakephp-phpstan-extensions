@@ -30,6 +30,9 @@ class QueryDynamicMethodReturnTypeExtension implements DynamicMethodReturnTypeEx
         return \Cake\ORM\Query::class;
     }
 
+    /**
+     * @var array<string>
+     */
     private $methods = [
         'contain',
         'formatResults',
