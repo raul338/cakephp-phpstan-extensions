@@ -1,22 +1,22 @@
 services:
     -
-        class: App\PHPStan\AssociationTableMixinClassReflectionExtension
+        class: Raul338\Phpstan\Cake\AssociationTableMixinClassReflectionExtension
         tags:
             - phpstan.broker.methodsClassReflectionExtension
             - phpstan.broker.propertiesClassReflectionExtension
     -
-        class: App\PHPStan\CrudSubjectDynamicMethodReturnExtension
+        class: Raul338\Phpstan\Cake\CrudSubjectDynamicMethodReturnExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
     -
-        class: App\PHPStan\ControllerDynamicMethodReturnExtension
+        class: Raul338\Phpstan\Cake\ControllerDynamicMethodReturnExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
     -
-        class: App\PHPStan\CrudDynamicMethodReturnExtension
+        class: Raul338\Phpstan\Cake\CrudDynamicMethodReturnExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
     -
-        class: App\PHPStan\QueryDynamicMethodReturnTypeExtension
+        class: Raul338\Phpstan\Cake\QueryDynamicMethodReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
