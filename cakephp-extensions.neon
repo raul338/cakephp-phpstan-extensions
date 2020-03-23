@@ -3,7 +3,6 @@ services:
         class: Raul338\Phpstan\Cake\AssociationTableMixinClassReflectionExtension
         tags:
             - phpstan.broker.methodsClassReflectionExtension
-            - phpstan.broker.propertiesClassReflectionExtension
     -
         class: Raul338\Phpstan\Cake\CrudSubjectDynamicMethodReturnExtension
         tags:
