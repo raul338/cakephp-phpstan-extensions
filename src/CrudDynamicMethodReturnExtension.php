@@ -87,9 +87,6 @@ class CrudDynamicMethodReturnExtension implements BrokerAwareExtension, DynamicM
         if (!$parameter instanceof \PhpParser\Node\Scalar\String_) {
             return $defaultReturn;
         }
-        if (count($methodCall->args) !== 1) {
-            return $defaultReturn;
-        }
         $arg = Inflector::camelize($parameter->value);
 
         $classes = [
