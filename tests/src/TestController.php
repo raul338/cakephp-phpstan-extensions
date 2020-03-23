@@ -62,4 +62,12 @@ class TestController extends Controller
         $this->Crud->addListener('relatedModels', 'Crud.RelatedModels');
         $this->Crud->listener('relatedModels')->relatedModels(true);
     }
+
+    public function crudSubjectTest()
+    {
+        $this->loadComponent('Crud');
+        $this->Crud->on('beforeFind', function (\Cake\Event\Event $event) {
+            $event->getSubject()->query;
+        });
+    }
 }
