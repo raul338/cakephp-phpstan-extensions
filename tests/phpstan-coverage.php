@@ -36,7 +36,9 @@ function endCoverage()
     }
 }
 
+// phpcs:disable
 class CoverageDumper
+// phpcs:enable
 {
     /**
      * @return void
