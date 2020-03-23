@@ -24,16 +24,24 @@
         "cakephp/cakephp-codesniffer": "^4.0",
         "dealerdirect/phpcodesniffer-composer-installer": "^0.6.2",
         "cakephp/cakephp": "^3.8",
-        "friendsofcake/crud": "^5.4"
+        "friendsofcake/crud": "^5.4",
+        "phpunit/php-code-coverage": "^8.0"
     },
     "autoload": {
         "psr-4": {
             "Raul338\\Phpstan\\Cake\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Raul338\\Phpstan\\Tests\\": "tests/src"
+        }
+    },
     "scripts": {
-        "cs-check": "vendor/bin/phpcs --colors -p -s ./src",
-        "cs-fix": "vendor/bin/phpcbf --colors -p -s ./src",
-        "phpstan": "phpstan analyze -c phpstan.neon --ansi --memory-limit=-1"
+        "cs-check": "vendor/bin/phpcs --colors -p -s ./src ./tests",
+        "cs-fix": "vendor/bin/phpcbf --colors -p -s ./src ./tests",
+        "test": "php tests/phpstan-coverage.php",
+        "phpstan": "vendor/bin/phpstan analyze -c phpstan.neon --ansi --memory-limit=-1",
+        "report": "php tests/coverage_report.php"
     }
 }

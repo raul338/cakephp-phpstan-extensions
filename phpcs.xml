@@ -4,4 +4,7 @@
         <exclude name="CakePHP.Commenting.FunctionComment" />
         <exclude name="Generic.Files.LineLength.TooLong" />
     </rule>
+     <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing">
+        <exclude-pattern>*/tests/*</exclude-pattern>
+    </rule>
 </ruleset>

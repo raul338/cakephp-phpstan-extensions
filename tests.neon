@@ -1,0 +1,6 @@
+includes:
+    - ./cakephp-extensions.neon
+parameters:
+    level: max
+    paths:
+        - tests/src
