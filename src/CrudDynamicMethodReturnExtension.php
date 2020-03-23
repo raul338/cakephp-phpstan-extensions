@@ -100,5 +100,7 @@ class CrudDynamicMethodReturnExtension implements BrokerAwareExtension, DynamicM
 
             return new ObjectType($class);
         }
+
+        return $defaultReturn;
     }
 }
