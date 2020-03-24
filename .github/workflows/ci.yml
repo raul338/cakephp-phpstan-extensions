@@ -16,6 +16,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
+        coverage: xdebug
+
     - name: Get Composer Cache Directory
       id: composer-cache
       run: |
@@ -33,9 +38,6 @@ jobs:
 
     - name: Run test
       run: composer run-script test
-
-    - name: Install xdebug
-      run: pecl install xdebug
 
     - name: Coverage Report
       run: composer run-script coverage
