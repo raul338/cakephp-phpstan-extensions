@@ -4,10 +4,9 @@
     "type": "phpstan-extension",
     "keywords": [
         "cakephp",
-        "stub",
-        "test",
-        "static",
-        "analysis"
+        "phpstan",
+        "phpstan-rules",
+        "static analysis"
     ],
     "license": "MIT",
     "authors": [
