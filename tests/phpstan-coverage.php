@@ -83,5 +83,6 @@ $input = new $arrayInput([
     '--configuration' => 'tests.neon',
     '--xdebug' => true,
     '--debug' => true,
+    '--no-progress' => true,
 ]);
 $app->run($input);

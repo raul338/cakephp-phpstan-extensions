@@ -40,8 +40,8 @@
         "cs-check": "vendor/bin/phpcs --colors -p -s ./src ./tests",
         "cs-fix": "vendor/bin/phpcbf --colors -p -s ./src ./tests",
         "clean": "rm -rf reports/* && rm -rf tmp/coverages/*",
-        "phpstan": "vendor/bin/phpstan analyze -c phpstan.neon --ansi --memory-limit=-1",
-        "phpstan-test": "vendor/bin/phpstan analyze -c tests.neon --xdebug",
+        "phpstan": "vendor/bin/phpstan analyze -c phpstan.neon --ansi --memory-limit=-1 --no-progress",
+        "phpstan-test": "vendor/bin/phpstan analyze -c tests.neon --xdebug --no-progress",
         "phpstan-coverage": "php tests/phpstan-coverage.php",
         "report": "php tests/coverage_report.php",
         "test": [
