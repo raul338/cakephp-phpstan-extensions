@@ -17,14 +17,14 @@
         }
     ],
     "require": {
-        "php": ">=7.3",
-        "phpstan/phpstan": "^0.12"
+        "php": "^7.1"
     },
     "require-dev": {
         "cakephp/cakephp-codesniffer": "^4.0",
         "dealerdirect/phpcodesniffer-composer-installer": "^0.6.2",
         "cakephp/cakephp": "^3.8",
         "friendsofcake/crud": "^5.4",
+        "phpstan/phpstan": "^0.12",
         "phpunit/php-code-coverage": "^8.0"
     },
     "autoload": {
