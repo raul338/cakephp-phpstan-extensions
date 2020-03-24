@@ -40,15 +40,19 @@
     "scripts": {
         "cs-check": "vendor/bin/phpcs --colors -p -s ./src ./tests",
         "cs-fix": "vendor/bin/phpcbf --colors -p -s ./src ./tests",
-        "coverage": "php tests/phpstan-coverage.php",
         "clean": "rm -rf reports/* && rm -rf tmp/coverages/*",
         "phpstan": "vendor/bin/phpstan analyze -c phpstan.neon --ansi --memory-limit=-1",
         "phpstan-test": "vendor/bin/phpstan analyze -c tests.neon --xdebug",
+        "phpstan-coverage": "php tests/phpstan-coverage.php",
         "report": "php tests/coverage_report.php",
         "test": [
-            "@clean",
+            "@cs-check",
             "@phpstan",
-            "@coverage",
+            "@phpstan-test"
+        ],
+        "coverage": [
+            "@clean",
+            "@phpstan-coverage",
             "@report"
         ]
     },
