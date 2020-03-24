@@ -1,5 +1,7 @@
 # CakePHP phpstan extensions
 
+![CI](https://github.com/raul338/cakephp-phpstan-extensions/workflows/CI/badge.svg?branch=master)
+
 Services to aid phpstan analysis on CakePHP projects
 
 | Version | CakePHP Version | phpstan version |
