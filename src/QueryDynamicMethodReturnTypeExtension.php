@@ -37,6 +37,7 @@ class QueryDynamicMethodReturnTypeExtension implements DynamicMethodReturnTypeEx
         'contain',
         'formatResults',
         'join',
+        'from',
     ];
 
     public function isMethodSupported(MethodReflection $methodReflection): bool
@@ -74,6 +75,17 @@ class QueryDynamicMethodReturnTypeExtension implements DynamicMethodReturnTypeEx
     }
 
     public function getTypeJoinMethod(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type
+    {
+        if (count($methodCall->args) === 0) {
+            $method = $methodReflection->getDeclaringClass()->getNativeMethod('clause');
+
+            return \PHPStan\Reflection\ParametersAcceptorSelector::selectSingle($method->getVariants())->getReturnType();
+        }
+
+        return new ObjectType($this->getClass());
+    }
+
+    public function getTypeFromMethod(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type
     {
         if (count($methodCall->args) === 0) {
             $method = $methodReflection->getDeclaringClass()->getNativeMethod('clause');
