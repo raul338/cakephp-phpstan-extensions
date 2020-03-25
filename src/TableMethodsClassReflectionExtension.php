@@ -68,5 +68,7 @@ class TableMethodsClassReflectionExtension implements MethodsClassReflectionExte
         if (array_key_exists($methodName, $this->methods)) {
             return $this->methods[$methodName];
         }
+
+        return $classReflection->getNativeMethod($methodName);
     }
 }
