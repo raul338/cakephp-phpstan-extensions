@@ -22,6 +22,22 @@ class TableMethodsClassReflectionExtension implements MethodsClassReflectionExte
      */
     private $methods = [];
 
+    private const INVALID_METHOD_NAMES = [
+        'initialize',
+        'beforeMarshal',
+        'beforeFind',
+        'buildValidator',
+        'buildRules',
+        'beforeRules',
+        'afterRules',
+        'beforeSave',
+        'afterSave',
+        'afterSaveCommit',
+        'beforeDelete',
+        'afterDelete',
+        'afterDeleteCommit',
+    ];
+
     private const PATTERN_MIXINS = "/\@mixin ([a-zA-Z0-9_\x7f-\xff\\\\]+Behavior)/";
     private const PATTERN_FINDBY = "/^find(?:\w+)?By/";
 
@@ -38,22 +54,26 @@ class TableMethodsClassReflectionExtension implements MethodsClassReflectionExte
         if (preg_match(self::PATTERN_FINDBY, $methodName) > 0) {
             return true;
         }
+        if (in_array($methodName, self::INVALID_METHOD_NAMES, true)) {
+            return false;
+        }
         $docblock = $classReflection->getNativeReflection()->getDocComment();
-        if ($docblock && preg_match(self::PATTERN_MIXINS, $docblock, $behaviors)) {
-            foreach ($behaviors as $behavior) {
+        if ($docblock && preg_match_all(self::PATTERN_MIXINS, $docblock, $behaviors)) {
+            foreach ($behaviors[1] as $behavior) {
                 if (!$this->broker->hasClass($behavior)) {
                     continue;
                 }
                 $class = $this->broker->getClass($behavior);
-                if ($class->hasMethod($methodName)) {
-                    $method = $class->getNativeMethod($methodName);
-                    if (!$method->isPublic()) {
-                        continue;
-                    }
-                    $this->methods[$methodName] = $method;
-
-                    return true;
+                if (!$class->hasMethod($methodName)) {
+                    continue;
                 }
+                $method = $class->getNativeMethod($methodName);
+                if (!$method->isPublic()) {
+                    continue;
+                }
+                $this->methods[$methodName] = $method;
+
+                return true;
             }
         }
 
