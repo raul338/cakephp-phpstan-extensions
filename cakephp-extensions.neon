@@ -1,6 +1,6 @@
 services:
     -
-        class: Raul338\Phpstan\Cake\AssociationTableMixinClassReflectionExtension
+        class: Raul338\Phpstan\Cake\TableMethodsClassReflectionExtension
         tags:
             - phpstan.broker.methodsClassReflectionExtension
     -

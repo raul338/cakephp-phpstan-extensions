@@ -2,6 +2,7 @@ includes:
     - ./cakephp-extensions.neon
 parameters:
     level: max
+    bootstrap: tests/constants.php
     paths:
         - tests/src
     universalObjectCratesClasses:
