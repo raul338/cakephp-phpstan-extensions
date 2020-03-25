@@ -12,3 +12,14 @@ if (!function_exists('dlog')) {
         file_put_contents(TMP . '/log.txt', $line . PHP_EOL, FILE_APPEND);
     }
 }
+if (!function_exists('dexport')) {
+    function dexport($obj)
+    {
+        ob_start();
+        var_dump($obj);
+        $content = ob_get_contents();
+        ob_end_clean();
+
+        return $content;
+    }
+}
