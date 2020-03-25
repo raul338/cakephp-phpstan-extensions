@@ -3,6 +3,7 @@
 namespace Raul338\Phpstan\Tests;
 
 use Cake\Collection\CollectionInterface;
+use Raul338\Phpstan\Tests\Model\Table\TestTable;
 
 $table = new TestTable([]);
 $q = $table->find('all')

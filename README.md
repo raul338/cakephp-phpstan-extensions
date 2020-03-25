@@ -35,6 +35,29 @@ This extension includes rules to analyze the following snippets wihout using var
 $query = $this->Users->findAllByUsername('joebob');
 ```
 
+### Detect methods from behaviors
+[Link to the Book](https://book.cakephp.org/3/en/orm/behaviors.html#defining-mixin-methods)
+
+This only works if the method name is not modified in implementedMethods. Otherwise the analysis may be wrong, or
+you'll have to decorate your code with dockblocks
+
+
+```php
+/**
+ * @mixin \Cake\ORM\Behavior\TimestampBehavior
+ */
+public class UsersTable extends Table
+{
+    public function initialize(array $config)
+    {
+        parent::initialize($config);
+        $this->addBehavior('Timestamp');
+    }
+}
+// somewhere else - phpstan will know its the Timestamp touch method
+$this->Users->touch($user);
+```
+
 ### Load Model in controllers
 [Link to the Book](https://book.cakephp.org/3/en/controllers.html#loading-additional-models)
 ```php
