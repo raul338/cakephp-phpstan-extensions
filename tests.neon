@@ -3,6 +3,7 @@ includes:
 parameters:
     level: max
     bootstrap: tests/constants.php
+    checkMissingIterableValueType: false
     paths:
         - tests/src
     universalObjectCratesClasses:
