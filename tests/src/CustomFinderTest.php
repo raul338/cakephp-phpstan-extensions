@@ -9,3 +9,4 @@ $count = $q->count();
 
 $entity = $table->newEntity();
 $table->touch($entity);
+$table->setLocale('es');

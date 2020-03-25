@@ -5,6 +5,7 @@ use Cake\ORM\Table;
 
 /**
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
+ * @mixin \Cake\ORM\Behavior\TranslateBehavior
  */
 class TestTable extends Table
 {
