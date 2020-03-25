@@ -4,3 +4,4 @@
 !/tmp/.gitignore
 /reports/
 !/reports/.gitignore
+/composer.lock
