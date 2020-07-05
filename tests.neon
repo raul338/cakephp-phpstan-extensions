@@ -2,7 +2,8 @@ includes:
     - ./cakephp-extensions.neon
 parameters:
     level: max
-    bootstrap: tests/constants.php
+    bootstrapFiles:
+        - tests/constants.php
     checkMissingIterableValueType: false
     paths:
         - tests/src
