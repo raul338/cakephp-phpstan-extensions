@@ -7,19 +7,22 @@ define('TMP', ROOT . DS . 'tmp' . DS);
 define('SRC', ROOT . DS . 'src' . DS);
 
 if (!function_exists('dlog')) {
-    function dlog($line)
+    function dlog(string $line): void
     {
         file_put_contents(TMP . '/log.txt', $line . PHP_EOL, FILE_APPEND);
     }
 }
 if (!function_exists('dexport')) {
-    function dexport($obj)
+    /**
+     * @param mixed $obj
+     */
+    function dexport($obj): string
     {
         ob_start();
         var_dump($obj);
         $content = ob_get_contents();
         ob_end_clean();
 
-        return $content;
+        return $content ?: '';
     }
 }
