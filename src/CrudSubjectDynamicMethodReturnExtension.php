@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace Raul338\Phpstan\Cake;
 
-use Cake\Event\Event;
+use Cake\Event\EventInterface;
+use Crud\Controller\Component\CrudComponent;
 use Crud\Event\Subject as Subject;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
@@ -11,13 +12,12 @@ use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
-use stdClass;
 
 class CrudSubjectDynamicMethodReturnExtension implements DynamicMethodReturnTypeExtension
 {
     public function getClass(): string
     {
-        return Event::class;
+        return EventInterface::class;
     }
 
     public function isMethodSupported(MethodReflection $methodReflection): bool
@@ -25,12 +25,20 @@ class CrudSubjectDynamicMethodReturnExtension implements DynamicMethodReturnType
         return $methodReflection->getName() === 'getSubject';
     }
 
-    public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type
+    public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): ?Type
     {
-        if (strpos($scope->getNamespace() ?: '', 'Controller') !== false) {
+        $stack = $scope->getFunctionCallStack();
+        if (!count($stack)) {
+            return null;
+        }
+        $last = array_pop($stack);
+        if (!$last instanceof MethodReflection) {
+            return null;
+        }
+        if ($last->getDeclaringClass()->getName() === CrudComponent::class) {
             return new ObjectType(Subject::class);
         }
 
-        return new ObjectType(stdClass::class);
+        return null;
     }
 }
