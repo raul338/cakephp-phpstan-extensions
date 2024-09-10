@@ -4,7 +4,6 @@ parameters:
     level: max
     bootstrapFiles:
         - tests/constants.php
-    checkMissingIterableValueType: false
     paths:
         - tests/src
     universalObjectCratesClasses:
