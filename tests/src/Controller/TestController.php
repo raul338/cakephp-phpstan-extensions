@@ -13,7 +13,7 @@ class TestController extends Controller
      */
 
     /**
-     * @return \Cake\Http\Response|null
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function add()
     {
@@ -25,7 +25,7 @@ class TestController extends Controller
 
     /**
      * @param int $id id
-     * @return \Cake\Http\Response|null
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function edit($id)
     {
@@ -37,7 +37,7 @@ class TestController extends Controller
 
     /**
      * @param int $id id
-     * @return \Cake\Http\Response|null
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function delete($id)
     {
@@ -48,7 +48,7 @@ class TestController extends Controller
     }
 
     /**
-     * @return \Cake\Http\Response|null
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function index()
     {
@@ -59,7 +59,7 @@ class TestController extends Controller
     }
 
     /**
-     * @return \Cake\Http\Response|null
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function view()
     {
@@ -70,7 +70,7 @@ class TestController extends Controller
     }
 
     /**
-     * @return \Cake\Http\Response|null
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function customActionTest()
     {
@@ -84,7 +84,7 @@ class TestController extends Controller
     }
 
     /**
-     * @return \Cake\Http\Response|null
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function relatedModelListenerTest()
     {
@@ -97,7 +97,7 @@ class TestController extends Controller
     }
 
     /**
-     * @return \Cake\Http\Response|null
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function crudSubjectTest()
     {

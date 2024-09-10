@@ -7,6 +7,6 @@ $table = new TestTable([]);
 $q = $table->findByColumn();
 $count = $q->count();
 
-$entity = $table->newEntity();
+$entity = $table->newEmptyEntity();
 $table->touch($entity);
 $table->setLocale('es');
