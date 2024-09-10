@@ -8,14 +8,6 @@ use Cake\Controller\Controller;
  */
 class TestController extends Controller
 {
-    /**
-     * @return void
-     */
-    public function loadModelTest()
-    {
-        $this->loadModel('Test');
-    }
-
     /*
      * Crud Action Tests
      */

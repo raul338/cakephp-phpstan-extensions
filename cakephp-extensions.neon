@@ -8,10 +8,6 @@ services:
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
     -
-        class: Raul338\Phpstan\Cake\ControllerDynamicMethodReturnExtension
-        tags:
-            - phpstan.broker.dynamicMethodReturnTypeExtension
-    -
         class: Raul338\Phpstan\Cake\CrudDynamicMethodReturnExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
