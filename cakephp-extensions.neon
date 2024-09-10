@@ -11,7 +11,3 @@ services:
         class: Raul338\Phpstan\Cake\CrudDynamicMethodReturnExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
-    -
-        class: Raul338\Phpstan\Cake\QueryDynamicMethodReturnTypeExtension
-        tags:
-            - phpstan.broker.dynamicMethodReturnTypeExtension
