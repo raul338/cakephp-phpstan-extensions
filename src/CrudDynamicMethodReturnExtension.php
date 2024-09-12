@@ -39,14 +39,14 @@ class CrudDynamicMethodReturnExtension implements BrokerAwareExtension, DynamicM
         ]);
     }
 
-    public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type
+    public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): ?Type
     {
         $funcion = 'getType' . Inflector::camelize($methodReflection->getName()) . 'Method';
 
         return $this->$funcion($methodReflection, $methodCall, $scope);
     }
 
-    public function getTypeActionMethod(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type
+    public function getTypeActionMethod(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): ?Type
     {
         $name = null;
         if ($scope->getFunction() !== null) {
@@ -68,24 +68,15 @@ class CrudDynamicMethodReturnExtension implements BrokerAwareExtension, DynamicM
             case 'view':
                 return new ObjectType(\Crud\Action\ViewAction::class);
             default:
-                return \PHPStan\Reflection\ParametersAcceptorSelector::selectFromArgs(
-                    $scope,
-                    $methodCall->args,
-                    $methodReflection->getVariants()
-                )->getReturnType();
+                return null;
         }
     }
 
-    public function getTypeListenerMethod(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type
+    public function getTypeListenerMethod(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): ?Type
     {
-        $defaultReturn = \PHPStan\Reflection\ParametersAcceptorSelector::selectFromArgs(
-            $scope,
-            $methodCall->args,
-            $methodReflection->getVariants()
-        )->getReturnType();
-        $parameter = $methodCall->args[0]->value;
+        $parameter = $methodCall->getArgs()[0]->value;
         if (!$parameter instanceof \PhpParser\Node\Scalar\String_) {
-            return $defaultReturn;
+            return null;
         }
         $arg = Inflector::camelize($parameter->value);
 
@@ -101,6 +92,6 @@ class CrudDynamicMethodReturnExtension implements BrokerAwareExtension, DynamicM
             return new ObjectType($class);
         }
 
-        return $defaultReturn;
+        return null;
     }
 }
