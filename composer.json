@@ -20,10 +20,11 @@
         "phpstan/phpstan": "^1.8"
     },
     "require-dev": {
+        "cakephp/cakephp": "^4.0",
         "cakephp/cakephp-codesniffer": "^4.0",
         "dealerdirect/phpcodesniffer-composer-installer": "^1.0.0",
-        "cakephp/cakephp": "^4.0",
-        "friendsofcake/crud": "^6.2"
+        "friendsofcake/crud": "^6.2",
+        "phpunit/phpunit": "^9.6"
     },
     "autoload": {
         "psr-4": {
@@ -32,7 +33,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Raul338\\Phpstan\\Tests\\": "tests/src"
+            "Raul338\\Phpstan\\Tests\\App\\": "tests/src",
+            "Raul338\\Phpstan\\Tests\\": "tests/TestCase"
         }
     },
     "scripts": {
@@ -56,6 +58,7 @@
     "config": {
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true
-        }
+        },
+        "sort-packages": true
     }
 }

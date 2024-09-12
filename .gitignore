@@ -2,3 +2,5 @@
 /*.code-workspace
 /composer.lock
 /.idea
+/.phpunit.cache
+/tmp

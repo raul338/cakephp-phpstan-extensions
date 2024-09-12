@@ -26,3 +26,5 @@ if (!function_exists('dexport')) {
         return $content ?: '';
     }
 }
+
+require 'vendor/autoload.php';

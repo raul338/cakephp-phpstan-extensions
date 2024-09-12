@@ -1,5 +1,5 @@
 <?php
-namespace Raul338\Phpstan\Tests\Controller;
+namespace Raul338\Phpstan\Tests\App\Controller;
 
 use Cake\Controller\Controller;
 
@@ -8,81 +8,6 @@ use Cake\Controller\Controller;
  */
 class TestController extends Controller
 {
-    /*
-     * Crud Action Tests
-     */
-
-    /**
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function add()
-    {
-        $this->loadComponent('Crud');
-        $this->Crud->action()->saveOptions([]);
-
-        return $this->Crud->execute();
-    }
-
-    /**
-     * @param int $id id
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function edit($id)
-    {
-        $this->loadComponent('Crud');
-        $this->Crud->action()->saveOptions([]);
-
-        return $this->Crud->execute();
-    }
-
-    /**
-     * @param int $id id
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function delete($id)
-    {
-        $this->loadComponent('Crud');
-        $this->Crud->action()->findMethod([]);
-
-        return $this->Crud->execute();
-    }
-
-    /**
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function index()
-    {
-        $this->loadComponent('Crud');
-        $this->Crud->action()->findMethod('');
-
-        return $this->Crud->execute();
-    }
-
-    /**
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function view()
-    {
-        $this->loadComponent('Crud');
-        $this->Crud->action()->findMethod('');
-
-        return $this->Crud->execute();
-    }
-
-    /**
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function customActionTest()
-    {
-        $this->loadComponent('Crud');
-        $this->Crud->mapAction('customActionTest', 'Crud.Index');
-        /** @var \Crud\Action\IndexAction $action */
-        $action = $this->Crud->action();
-        $action->findMethod('');
-
-        return $this->Crud->execute();
-    }
-
     /**
      * @return \Psr\Http\Message\ResponseInterface
      */

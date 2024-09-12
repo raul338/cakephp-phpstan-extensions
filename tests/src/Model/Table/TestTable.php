@@ -1,5 +1,5 @@
 <?php
-namespace Raul338\Phpstan\Tests\Model\Table;
+namespace Raul338\Phpstan\Tests\App\Model\Table;
 
 use Cake\ORM\Table;
 

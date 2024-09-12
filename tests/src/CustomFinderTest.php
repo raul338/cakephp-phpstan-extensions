@@ -1,7 +1,7 @@
 <?php
-namespace Raul338\Phpstan\Tests;
+namespace Raul338\Phpstan\Tests\App;
 
-use Raul338\Phpstan\Tests\Model\Table\TestTable;
+use Raul338\Phpstan\Tests\App\Model\Table\TestTable;
 
 $table = new TestTable([]);
 $q = $table->findByColumn();

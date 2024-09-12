@@ -1,5 +1,5 @@
 <?php
-namespace Raul338\Phpstan\Tests\Controller;
+namespace Raul338\Phpstan\Tests\App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
