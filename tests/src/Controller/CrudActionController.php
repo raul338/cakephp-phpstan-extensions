@@ -62,16 +62,4 @@ class CrudActionController extends Controller
         $this->loadComponent('Crud');
         assertType(ViewAction::class, $this->Crud->action());
     }
-
-    /**
-     * this test is not enabled yet
-     * @ return void
-     *
-    public function customActionTest(): void
-    {
-        $this->loadComponent('Crud');
-        $this->Crud->mapAction('customActionTest', 'Crud.Index');
-        assertType(IndexAction::class, $this->Crud->action());
-    }
-     * */
 }

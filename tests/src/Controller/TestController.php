@@ -2,6 +2,7 @@
 namespace Raul338\Phpstan\Tests\App\Controller;
 
 use Cake\Controller\Controller;
+use Cake\Event\EventInterface;
 
 /**
  * @property \Crud\Controller\Component\CrudComponent $Crud
@@ -27,8 +28,9 @@ class TestController extends Controller
     public function crudSubjectTest()
     {
         $this->loadComponent('Crud');
-        $this->Crud->on('beforeFind', function (\Cake\Event\Event $event) {
-            $event->getSubject()->query->contain('example');
+        $this->Crud->on('beforeFind', function (EventInterface $event) {
+            $query = $event->getSubject()->query;
+            $query->contain('example');
         });
 
         return $this->Crud->execute();
