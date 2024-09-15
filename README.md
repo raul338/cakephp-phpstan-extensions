@@ -1,13 +1,14 @@
 # CakePHP phpstan extensions
 
-![CI](https://github.com/raul338/cakephp-phpstan-extensions/workflows/CI/badge.svg?branch=master)
+[![CI](https://github.com/raul338/cakephp-phpstan-extensions/actions/workflows/static-analysis.yml/badge.svg)](https://github.com/raul338/cakephp-phpstan-extensions/actions/workflows/static-analysis.yml)
 
 Services to aid phpstan analysis on CakePHP projects
 
 | Version | CakePHP Version | phpstan version |
-| ------- | --------------- | --------------- |
-| 2.x | 3.x | 0.12 |
-| 1.x | 3.x | 0.11 |
+|---------|-----------------|-----------------|
+| 3.x     | 4.x             | 1.10+           |
+| 2.x     | 3.x             | 0.12            |
+| 1.x     | 3.x             | 0.11            |
 
 ## Install
 ```sh
@@ -23,7 +24,7 @@ or if you don't use phpstan/extension-installer, include in your phpstan.neon
 
 ```
 includes:
-	- vendor/raul338/cakephp-phpstan-extensions/src/extension.neon
+	- vendor/raul338/cakephp-phpstan-extensions/src/cakephp-extensions.neon
 ```
 
 ## How does this help me
@@ -56,23 +57,6 @@ public class UsersTable extends Table
 }
 // somewhere else - phpstan will know its the Timestamp touch method
 $this->Users->touch($user);
-```
-
-### Load Model in controllers
-[Link to the Book](https://book.cakephp.org/3/en/controllers.html#loading-additional-models)
-```php
-// phpstan will know $users is App\Model\UsersTable
-$users = $this->loadModel('Users');
-```
-
-### Query functions getters/setters
-Without this extensions phpstan will complain that contain returns `\Cake\ORM\Query|array` instad of just a `Query`
-The same with
-* formatResults  
-* join
-
-```php
-$query = $this->Users->find('all')->contain(['Books']);
 ```
 
 ### FriendsOfCake/crud Actions & Listeners
@@ -114,13 +98,6 @@ public function custom()
 
 ### FriendsOfCake/crud Event Subject
 Tell phpstan that if is an event inside a Controller, the subject will probably be a CrudSubject
-
-You'll have to add to you `phpstan.neon`
-```neon
-parameters:
-    universalObjectCratesClasses:
-        - Crud\Event\Subject
-```
 
 Example:
 ```php
