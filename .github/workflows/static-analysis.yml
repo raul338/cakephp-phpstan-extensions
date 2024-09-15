@@ -5,6 +5,8 @@ on:
     branches:
       - master
       - '1.x'
+      - '2.x'
+      - '3.x'
   pull_request:
     branches: ['*']
 
@@ -12,31 +14,36 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - uses: shivammathur/setup-php@v2
       with:
         php-version: '7.4'
-        coverage: xdebug
 
     - name: Get Composer Cache Directory
       id: composer-cache
       run: |
-        echo "::set-output name=dir::$(composer config cache-files-dir)"
+        echo "CI_COMPOSER_CACHE_DIR=$(composer config cache-files-dir)" >> $GITHUB_STATE
 
     - name: Get date part for cache key
       id: key-date
-      run: echo "::set-output name=date::$(date +'%Y-%m')"
+      run: echo "CI_COMPOSER_CACHE_DATE=$(date +'%Y-%m')" >> $GITHUB_STATE
 
-    - uses: actions/cache@v1
+    - uses: actions/cache@v4
       with:
-        path: ${{ steps.composer-cache.outputs.dir }}
-        key: ${{ runner.os }}-composer-${{ steps.key-date.outputs.date }}-${{ hashFiles('composer.json') }}
+        path: $CI_COMPOSER_CACHE_DIR
+        key: ${{ runner.os }}-composer-${CI_COMPOSER_CACHE_DATE}-${{ hashFiles('composer.json') }}
         restore-keys: |
           ${{ runner.os }}-composer-
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
 
-    - name: Run test
-      run: composer run-script test
+    - name: Code Style Check
+      run: vendor/bin/phpcs
+
+    - name: phpstan
+      run: vendor/bin/phpstan analyze -c phpstan.neon --no-progress
+
+    - name: phpunit
+      run: vendor/bin/phpunit --testdox
