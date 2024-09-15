@@ -1,5 +1,6 @@
 includes:
     - ./cakephp-extensions.neon
+    - ./phpstan-baseline.neon
 parameters:
     level: max
     bootstrapFiles:

@@ -1,0 +1,16 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method Raul338\\\\Phpstan\\\\Tests\\\\CurdDynamicMethodReturnExtensionTest\\:\\:testFileAsserts\\(\\) has parameter \\$args with no type specified\\.$#"
+			count: 1
+			path: tests/TestCase/CurdDynamicMethodReturnExtensionTest.php
+
+		-
+			message: "#^Method Raul338\\\\Phpstan\\\\Tests\\\\CurdSubjectDynamicMethodReturnExtensionTest\\:\\:testFileAsserts\\(\\) has parameter \\$args with no type specified\\.$#"
+			count: 1
+			path: tests/TestCase/CurdSubjectDynamicMethodReturnExtensionTest.php
+
+		-
+			message: "#^Method Raul338\\\\Phpstan\\\\Tests\\\\TableMethodsClassReflectionExtensionTest\\:\\:testFileAsserts\\(\\) has parameter \\$args with no type specified\\.$#"
+			count: 1
+			path: tests/TestCase/TableMethodsClassReflectionExtensionTest.php
