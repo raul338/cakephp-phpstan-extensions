@@ -59,7 +59,7 @@ class TableMethodsClassReflectionExtension implements MethodsClassReflectionExte
                 if (!$this->reflectionProvider->hasClass($behavior)) {
                     continue;
                 }
-                $class =$this->reflectionProvider->getClass($behavior);
+                $class = $this->reflectionProvider->getClass($behavior);
                 if (!$class->hasMethod($methodName)) {
                     continue;
                 }

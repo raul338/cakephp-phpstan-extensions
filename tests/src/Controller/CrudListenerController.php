@@ -2,7 +2,6 @@
 namespace Raul338\Phpstan\Tests\App\Controller;
 
 use Cake\Controller\Controller;
-use Cake\Event\EventInterface;
 use Crud\Listener\RelatedModelsListener;
 use function PHPStan\Testing\assertType;
 

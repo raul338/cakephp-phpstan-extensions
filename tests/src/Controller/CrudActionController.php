@@ -8,7 +8,6 @@ use Crud\Action\DeleteAction;
 use Crud\Action\EditAction;
 use Crud\Action\IndexAction;
 use Crud\Action\ViewAction;
-use Crud\Controller\Component\CrudComponent;
 use function PHPStan\Testing\assertType;
 
 /**
