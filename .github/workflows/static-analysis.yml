@@ -23,16 +23,12 @@ jobs:
     - name: Get Composer Cache Directory
       id: composer-cache
       run: |
-        echo "CI_COMPOSER_CACHE_DIR=$(composer config cache-files-dir)" >> $GITHUB_STATE
-
-    - name: Get date part for cache key
-      id: key-date
-      run: echo "CI_COMPOSER_CACHE_DATE=$(date +'%Y-%m')" >> $GITHUB_STATE
+        echo "CI_COMPOSER_CACHE_DIR=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
     - uses: actions/cache@v4
       with:
-        path: $CI_COMPOSER_CACHE_DIR
-        key: ${{ runner.os }}-composer-${CI_COMPOSER_CACHE_DATE}-${{ hashFiles('composer.json') }}
+        path: ${{ steps.composer-cache.outputs.CI_COMPOSER_CACHE_DIR }}
+        key: ${{ runner.os }}-composer-${{ hashFiles('composer.json') }}
         restore-keys: |
           ${{ runner.os }}-composer-
 
