@@ -4,10 +4,11 @@ services:
         tags:
             - phpstan.broker.methodsClassReflectionExtension
     -
-        class: Raul338\Phpstan\Cake\CrudSubjectDynamicMethodReturnExtension
-        tags:
-            - phpstan.broker.dynamicMethodReturnTypeExtension
-    -
         class: Raul338\Phpstan\Cake\CrudDynamicMethodReturnExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
+parameters:
+    stubFiles:
+        - stubs/CrudComponent.php
+    universalObjectCratesClasses:
+        - Crud\Event\Subject

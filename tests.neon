@@ -3,8 +3,6 @@ includes:
 parameters:
     level: max
     bootstrapFiles:
-        - tests/constants.php
+        - tests/bootstrap.php
     paths:
         - tests/src
-    universalObjectCratesClasses:
-        - Crud\Event\Subject
