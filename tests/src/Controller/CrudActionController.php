@@ -11,7 +11,7 @@ use Crud\Action\ViewAction;
 use function PHPStan\Testing\assertType;
 
 /**
- * @property CrudComponent $Crud
+ * @property \Crud\Controller\Component\CrudComponent $Crud
  */
 class CrudActionController extends Controller
 {

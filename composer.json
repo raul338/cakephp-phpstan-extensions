@@ -41,11 +41,11 @@
         "cs-check": "vendor/bin/phpcs --colors -p -s ./src ./tests",
         "cs-fix": "vendor/bin/phpcbf --colors -p -s ./src ./tests",
         "phpstan": "vendor/bin/phpstan analyze -c phpstan.neon --ansi --memory-limit=-1 --no-progress",
-        "phpstan-test": "vendor/bin/phpstan analyze -c tests.neon --no-progress",
+        "phpunit": "vendor/bin/phpunit",
         "test": [
             "@cs-check",
             "@phpstan",
-            "@phpstan-test"
+            "@phpunit"
         ]
     },
     "extra": {

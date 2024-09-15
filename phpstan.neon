@@ -1,4 +1,10 @@
+includes:
+    - ./cakephp-extensions.neon
 parameters:
     level: max
+    bootstrapFiles:
+        - tests/bootstrap.php
     paths:
         - src
+        - tests/src
+        - tests/TestCase

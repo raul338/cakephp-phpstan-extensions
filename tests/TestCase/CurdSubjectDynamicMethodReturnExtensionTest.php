@@ -31,6 +31,6 @@ class CurdSubjectDynamicMethodReturnExtensionTest extends TypeInferenceTestCase
     public static function getAdditionalConfigFiles(): array
     {
         // path to your project's phpstan.neon, or extension.neon in case of custom extension packages
-        return [ROOT . DS . 'tests.neon'];
+        return [ROOT . DS . 'cakephp-extensions.neon'];
     }
 }

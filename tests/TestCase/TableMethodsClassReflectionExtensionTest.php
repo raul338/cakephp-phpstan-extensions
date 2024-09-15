@@ -28,6 +28,6 @@ class TableMethodsClassReflectionExtensionTest extends TypeInferenceTestCase
 
     public static function getAdditionalConfigFiles(): array
     {
-        return [ROOT . DS . 'tests.neon'];
+        return [ROOT . DS . 'cakephp-extensions.neon'];
     }
 }

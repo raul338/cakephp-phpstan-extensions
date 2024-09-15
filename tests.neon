@@ -1,8 +1,0 @@
-includes:
-    - ./cakephp-extensions.neon
-parameters:
-    level: max
-    bootstrapFiles:
-        - tests/bootstrap.php
-    paths:
-        - tests/src
