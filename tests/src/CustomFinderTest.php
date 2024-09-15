@@ -1,12 +1,14 @@
 <?php
 namespace Raul338\Phpstan\Tests\App;
 
+use Cake\ORM\Query;
 use Raul338\Phpstan\Tests\App\Model\Table\TestTable;
+use function PHPStan\Testing\assertType;
 
 $table = new TestTable([]);
 $q = $table->findByColumn();
-$count = $q->count();
+assertType(Query::class, $q);
 
 $entity = $table->newEmptyEntity();
-$table->touch($entity);
-$table->setLocale('es');
+assertType('bool', $table->touch($entity));
+assertType('string', $table->translationField('field'));

@@ -4,18 +4,14 @@ declare(strict_types=1);
 namespace Raul338\Phpstan\Cake;
 
 use Cake\ORM\Table;
-use PHPStan\Broker\Broker;
-use PHPStan\Reflection\BrokerAwareExtension;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Reflection\MethodsClassReflectionExtension;
+use PHPStan\Reflection\ReflectionProvider;
 
-class TableMethodsClassReflectionExtension implements MethodsClassReflectionExtension, BrokerAwareExtension
+class TableMethodsClassReflectionExtension implements MethodsClassReflectionExtension
 {
-    /**
-     * @var \PHPStan\Broker\Broker
-     */
-    private $broker = null;
+    private ReflectionProvider $reflectionProvider;
 
     /**
      * @var array<string,\PHPStan\Reflection\MethodReflection>
@@ -39,11 +35,11 @@ class TableMethodsClassReflectionExtension implements MethodsClassReflectionExte
     ];
 
     private const PATTERN_MIXINS = "/\@mixin ([a-zA-Z0-9_\x7f-\xff\\\\]+Behavior)/";
-    private const PATTERN_FINDBY = "/^find(?:\w+)?By/";
+    private const PATTERN_FINDBY = "/^findBy(?:\w+)?/";
 
-    public function setBroker(Broker $broker): void
+    public function __construct(ReflectionProvider $reflectionProvider)
     {
-        $this->broker = $broker;
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function hasMethod(ClassReflection $classReflection, string $methodName): bool
@@ -60,10 +56,10 @@ class TableMethodsClassReflectionExtension implements MethodsClassReflectionExte
         $docblock = $classReflection->getNativeReflection()->getDocComment();
         if ($docblock && preg_match_all(self::PATTERN_MIXINS, $docblock, $behaviors)) {
             foreach ($behaviors[1] as $behavior) {
-                if (!$this->broker->hasClass($behavior)) {
+                if (!$this->reflectionProvider->hasClass($behavior)) {
                     continue;
                 }
-                $class = $this->broker->getClass($behavior);
+                $class =$this->reflectionProvider->getClass($behavior);
                 if (!$class->hasMethod($methodName)) {
                     continue;
                 }
