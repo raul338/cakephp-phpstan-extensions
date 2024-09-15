@@ -7,23 +7,19 @@ use Cake\Utility\Inflector;
 use Crud\Controller\Component\CrudComponent;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
-use PHPStan\Broker\Broker;
-use PHPStan\Reflection\BrokerAwareExtension;
 use PHPStan\Reflection\MethodReflection;
+use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 
-class CrudDynamicMethodReturnExtension implements BrokerAwareExtension, DynamicMethodReturnTypeExtension
+class CrudDynamicMethodReturnExtension implements DynamicMethodReturnTypeExtension
 {
-    /**
-     * @var \PHPStan\Broker\Broker
-     */
-    private $broker = null;
+    private ReflectionProvider $reflectionProvider;
 
-    public function setBroker(Broker $broker): void
+    public function __construct(ReflectionProvider $reflectionProvider)
     {
-        $this->broker = $broker;
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function getClass(): string
@@ -85,7 +81,7 @@ class CrudDynamicMethodReturnExtension implements BrokerAwareExtension, DynamicM
             'Crud\Listener\\' . $arg . 'Listener',
         ];
         foreach ($classes as $class) {
-            if (!$this->broker->hasClass($class)) {
+            if (!$this->reflectionProvider->hasClass($class)) {
                 continue;
             }
 

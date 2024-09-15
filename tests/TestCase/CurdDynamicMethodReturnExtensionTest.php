@@ -12,8 +12,8 @@ class CurdDynamicMethodReturnExtensionTest extends TypeInferenceTestCase
      */
     public static function dataFileAsserts(): iterable
     {
-        // path to a file with actual asserts of expected types:
         yield from self::gatherAssertTypes(ROOT . '/tests/src/Controller/CrudActionController.php');
+        yield from self::gatherAssertTypes(ROOT . '/tests/src/Controller/CrudListenerController.php');
     }
 
     /**
