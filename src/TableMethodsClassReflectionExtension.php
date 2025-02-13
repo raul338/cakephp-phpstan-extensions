@@ -16,7 +16,7 @@ class TableMethodsClassReflectionExtension implements MethodsClassReflectionExte
     /**
      * @var array<string,\PHPStan\Reflection\MethodReflection>
      */
-    private $methods = [];
+    private array $methods = [];
 
     private const INVALID_METHOD_NAMES = [
         'initialize',

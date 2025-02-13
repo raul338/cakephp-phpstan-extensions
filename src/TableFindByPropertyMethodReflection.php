@@ -15,12 +15,12 @@ class TableFindByPropertyMethodReflection implements MethodReflection
     /**
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @var \PHPStan\Reflection\ClassReflection
      */
-    private $declaringClass;
+    private ClassReflection $declaringClass;
 
     public function __construct(string $name, ClassReflection $declaringClass)
     {
@@ -44,7 +44,7 @@ class TableFindByPropertyMethodReflection implements MethodReflection
     }
 
     /**
-     * @return \PHPStan\Reflection\ParameterReflection[]
+     * @return array<\PHPStan\Reflection\ParameterReflection>
      */
     public function getParameters(): array
     {

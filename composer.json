@@ -16,15 +16,15 @@
         }
     ],
     "require": {
-        "php": "^7.4|~8.0",
+        "php": ">=8.1",
         "phpstan/phpstan": "^2.0"
     },
     "require-dev": {
-        "cakephp/cakephp": "^4.0",
-        "cakephp/cakephp-codesniffer": "^4.0",
+        "cakephp/cakephp": "^5.1",
+        "cakephp/cakephp-codesniffer": "^5.1",
         "dealerdirect/phpcodesniffer-composer-installer": "^1.0.0",
-        "friendsofcake/crud": "^6.2",
-        "phpunit/phpunit": "^9.6"
+        "friendsofcake/crud": "^7.1",
+        "phpunit/phpunit": "^10.5"
     },
     "autoload": {
         "psr-4": {

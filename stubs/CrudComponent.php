@@ -3,11 +3,8 @@
 declare(strict_types=1);
 
 namespace Cake\Event {
-
-    use Crud\Event\Subject;
-
     /**
-     * @template TSubject
+     * @template TSubject of object
      */
     interface EventInterface {
         /**
@@ -23,7 +20,7 @@ namespace Cake\Event {
     class Subject {}
 
     /**
-     * @template TSubject
+     * @template TSubject of object
      * @implements EventInterface<TSubject>
      */
     class Event implements EventInterface {}

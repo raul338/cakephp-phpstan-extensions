@@ -4,8 +4,14 @@ declare(strict_types=1);
 namespace Raul338\Phpstan\Cake;
 
 use Cake\Utility\Inflector;
+use Crud\Action\AddAction;
+use Crud\Action\DeleteAction;
+use Crud\Action\EditAction;
+use Crud\Action\IndexAction;
+use Crud\Action\ViewAction;
 use Crud\Controller\Component\CrudComponent;
 use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Scalar\String_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Reflection\ReflectionProvider;
@@ -38,14 +44,12 @@ class CrudDynamicMethodReturnExtension implements DynamicMethodReturnTypeExtensi
     public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): ?Type
     {
         $method = Inflector::camelize($methodReflection->getName());
-        switch ($method) {
-            case 'Action':
-                return $this->getTypeActionMethod($methodReflection, $methodCall, $scope);
-            case 'Listener':
-                return $this->getTypeListenerMethod($methodReflection, $methodCall, $scope);
-            default:
-                return null;
-        }
+
+        return match ($method) {
+            'Action' => $this->getTypeActionMethod($methodReflection, $methodCall, $scope),
+            'Listener' => $this->getTypeListenerMethod($methodReflection, $methodCall, $scope),
+            default => null,
+        };
     }
 
     public function getTypeActionMethod(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): ?Type
@@ -54,30 +58,25 @@ class CrudDynamicMethodReturnExtension implements DynamicMethodReturnTypeExtensi
         if ($scope->getFunction() !== null) {
             $name = $scope->getFunction()->getName();
         }
-        switch ($name) {
-            case 'index':
-                return new ObjectType(\Crud\Action\IndexAction::class);
-            case 'agregar':
-            case 'add':
-                return new ObjectType(\Crud\Action\AddAction::class);
-            case 'editar':
-            case 'edit':
-                return new ObjectType(\Crud\Action\EditAction::class);
-            case 'borrar':
-            case 'delete':
-                return new ObjectType(\Crud\Action\DeleteAction::class);
-            case 'ver':
-            case 'view':
-                return new ObjectType(\Crud\Action\ViewAction::class);
-            default:
-                return null;
-        }
+
+        return match ($name) {
+            'index' => new ObjectType(IndexAction::class),
+            'agregar',
+            'add' => new ObjectType(AddAction::class),
+            'editar',
+            'edit' => new ObjectType(EditAction::class),
+            'borrar',
+            'delete' => new ObjectType(DeleteAction::class),
+            'ver',
+            'view' => new ObjectType(ViewAction::class),
+            default => null,
+        };
     }
 
     public function getTypeListenerMethod(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): ?Type
     {
         $parameter = $methodCall->getArgs()[0]->value;
-        if (!$parameter instanceof \PhpParser\Node\Scalar\String_) {
+        if (!$parameter instanceof String_) {
             return null;
         }
         $arg = Inflector::camelize($parameter->value);
