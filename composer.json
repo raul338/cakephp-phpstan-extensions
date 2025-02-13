@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": "^7.4|~8.0",
-        "phpstan/phpstan": "^1.10"
+        "phpstan/phpstan": "^2.0"
     },
     "require-dev": {
         "cakephp/cakephp": "^4.0",

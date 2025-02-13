@@ -37,9 +37,15 @@ class CrudDynamicMethodReturnExtension implements DynamicMethodReturnTypeExtensi
 
     public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): ?Type
     {
-        $funcion = 'getType' . Inflector::camelize($methodReflection->getName()) . 'Method';
-
-        return $this->$funcion($methodReflection, $methodCall, $scope);
+        $method = Inflector::camelize($methodReflection->getName());
+        switch ($method) {
+            case 'Action':
+                return $this->getTypeActionMethod($methodReflection, $methodCall, $scope);
+            case 'Listener':
+                return $this->getTypeListenerMethod($methodReflection, $methodCall, $scope);
+            default:
+                return null;
+        }
     }
 
     public function getTypeActionMethod(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): ?Type
