@@ -6,6 +6,8 @@ Services to aid phpstan analysis on CakePHP projects
 
 | Version | CakePHP Version | phpstan version |
 |---------|-----------------|-----------------|
+| 5.x     | 5.x             | 2.0+            |
+| 4.x     | 4.x             | 2.0+            |
 | 3.x     | 4.x             | 1.10+           |
 | 2.x     | 3.x             | 0.12            |
 | 1.x     | 3.x             | 0.11            |
